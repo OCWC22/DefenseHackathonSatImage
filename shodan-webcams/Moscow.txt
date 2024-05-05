@@ -1,0 +1,11 @@
+89.222.194.170	8090	Netorn LLC	host-89-222-194-170.netorn.net	
+23.111.202.77	8181	EDINAYA SET LIMITED LIABILITY COMPANY	webcamege.ru	
+23.111.202.77	8443	EDINAYA SET LIMITED LIABILITY COMPANY	webcamege.ru	
+89.222.194.170	8200	Netorn LLC	host-89-222-194-170.netorn.net	
+109.170.8.130	8800	PJSC MegaFon		
+195.90.163.38	8080	Rosnet ( Russian Data Communication Company )		
+109.170.8.130	8080	PJSC MegaFon		
+79.165.169.77	8554	Central Telegraph Public Joint-stock Company	host-79-165-169-77.qwerty.ru	
+213.141.148.17	8081	Consul-net Network Moscow		
+82.146.59.228	5001	JSC IOT	vpn.lepikhin.site	
+
