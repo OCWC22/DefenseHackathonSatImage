@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Viewer</title>
+</head>
+<body>
+    <div id="media-container" style="width: 100%; height: 90vh; display: flex; justify-content: center; align-items: center;">
+        <img id="media" src="" style="max-width: 100%; max-height: 100%;" />
+        <video id="video" style="max-width: 100%; max-height: 100%; display: none;" controls autoplay muted onended="nextMedia()">
+            <source id="video-source" src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <script>
+        let baseFolder = "feeds/";
+        let mediaFiles = [
+            "image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg",
+            "image6.jpg", "image7.jpg", "image8.jpg", "image9.jpg", "video1.mov", "video2.mov"
+        ].map(file => baseFolder + file);
+
+        let currentIndex = 0;
+        const mediaElement = document.getElementById('media');
+        const videoElement = document.getElementById('video');
+        const videoSource = document.getElementById('video-source');
+
+        function nextMedia() {
+            if (currentIndex >= mediaFiles.length) {
+                currentIndex = 0; // Loop back to the first media
+            }
+
+            const currentFile = mediaFiles[currentIndex];
+            const isVideo = currentFile.endsWith('.mov');
+
+            if (isVideo) {
+                mediaElement.style.display = 'none';
+                videoElement.style.display = 'block';
+                videoSource.src = currentFile;
+                videoElement.load();  // Ensure the video is loaded
+                videoElement.play();  // Play the video
+            } else {
+                videoElement.style.display = 'none';
+                mediaElement.style.display = 'block';
+                mediaElement.src = currentFile;
+                setTimeout(nextMedia, 3000); // Move to next media after 30 seconds
+            }
+
+            currentIndex++;  // Increment the index for the next cycle
+        }
+
+        window.onload = nextMedia; // Start cycling media when the page loads
+    </script>
+</body>
+</html>
