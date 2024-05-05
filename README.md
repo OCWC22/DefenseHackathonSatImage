@@ -7,3 +7,4 @@
 
 weights in the notion doc (don't post)
 
+save vision projection file in [osint-id folder](osint-id) inside `checkpoints/grid/vision_projection.final.pt`

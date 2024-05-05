@@ -1,7 +1,9 @@
 import argparse
 import torch
 import time
+import sys
 import gradio as gr
+sys.path.append('../moondream')
 from moondream import detect_device, LATEST_REVISION
 from threading import Thread
 from transformers import TextIteratorStreamer, AutoTokenizer, AutoModelForCausalLM
