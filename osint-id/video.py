@@ -7,9 +7,10 @@ sys.path.append('../moondream')
 from moondream import detect_device, LATEST_REVISION
 from threading import Thread
 from transformers import TextIteratorStreamer, AutoTokenizer, AutoModelForCausalLM
-from PIL import ImageDraw
+from PIL import ImageDraw, Image
 import re
 from torchvision.transforms.v2 import Resize
+import cv2
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--cpu", action="store_true")
@@ -152,13 +153,25 @@ with gr.Blocks() as demo:
 
     @demo.load(outputs=[output])
     def process_video():
-        while True:
-            if latest_frame is None:
-                time.sleep(0.1)
-            else:
-                for text in answer_question(latest_frame, latest_prompt):
-                    if len(text) > 0:
-                        yield text
+        video_path = latest_frame
+        cap = cv2.VideoCapture(video_path)
+
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            # Convert the frame from BGR to RGB color space
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            # Convert the frame to a PIL Image object
+            frame = Image.fromarray(frame)
+
+            for text in answer_question(frame, latest_prompt):
+                if len(text) > 0:
+                    yield text
+
+        cap.release()
 
     output.change(process_answer, [video, output], ann, show_progress=False)
 
