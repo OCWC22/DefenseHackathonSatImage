@@ -30,7 +30,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_id, revision=LATEST_REVISION)
 moondream = AutoModelForCausalLM.from_pretrained(
     model_id, trust_remote_code=True, revision=LATEST_REVISION
 )
-path = "checkpoints/float"
+path = "checkpoints/grid"
 moondream.vision_encoder.projection.load_state_dict(
     torch.load(f"{path}/vision_projection.final.pt", map_location="cpu")
 )
